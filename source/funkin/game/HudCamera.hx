@@ -11,6 +11,7 @@ class HudCamera extends FlxCamera {
 	 * Keeps the sprites not flipped, but the positions are flipped.
 	 */
 	public var downscroll:Bool = false;
+	public var downscrollExclude:Array<FlxObject> = [];
 	//public override function update(elapsed:Float) {
 	//	super.update(elapsed);
 	//	// flipY = downscroll;
@@ -29,7 +30,7 @@ class HudCamera extends FlxCamera {
 
 
 	public override function alterScreenPosition(spr:FlxObject, pos:FlxPoint) {
-		if (downscroll) {
+		if (downscroll && !downscrollExclude.contains(spr)) {
 			pos.set(pos.x, height - pos.y - spr.height);
 		}
 		return pos;
